@@ -58,32 +58,38 @@ def main():
     limpiarConsola()
     print("\033[0;37m" + tituloApp)
     contador = 0
-    segundosTrabajo = input("Introduce el tiempo de trabajo en minutos: ")
-    segundosTrabajo = int(segundosTrabajo) * 60
-    segundosDescanso = round(segundosTrabajo / 5)
-    segundosDescansoLargo = round(segundosDescanso * 4)
-    confirmacion = input("\033[0;37m" + "¿Estás listo para empezar? (Yes/No/Exit): ")
+    try:
+        segundosTrabajo = input("Introduce el tiempo de trabajo en minutos: ")
+        segundosTrabajo = int(segundosTrabajo) * 60
+        segundosDescanso = round(segundosTrabajo / 5)
+        segundosDescansoLargo = round(segundosDescanso * 4)
+        confirmacion = input(
+            "\033[0;37m" + "¿Estás listo para empezar? (Yes/No/Exit): ")
 
-    if confirmacion.upper() == "Y" or confirmacion.upper() == "YES":
-        while contador < 5:
-            if contador < 3:
-                limpiarConsola()
-                cuentaAtras(colorRojo, segundosTrabajo)
-                contador += 1
-                limpiarConsola()
-                cuentaAtras(colorVerde, segundosDescanso)
-            elif contador == 3:
-                limpiarConsola()
-                cuentaAtras(colorRojo, segundosTrabajo)
-            else:
-                limpiarConsola()
-                cuentaAtras(colorAmarillo, segundosDescansoLargo)
-                contador = 0
-    elif confirmacion.upper == "N" or confirmacion == "NO":
+        if confirmacion.upper() == "Y" or confirmacion.upper() == "YES":
+            while contador < 5:
+                if contador < 3:
+                    limpiarConsola()
+                    cuentaAtras(colorRojo, segundosTrabajo)
+                    contador += 1
+                    limpiarConsola()
+                    cuentaAtras(colorVerde, segundosDescanso)
+                elif contador == 3:
+                    limpiarConsola()
+                    cuentaAtras(colorRojo, segundosTrabajo)
+                else:
+                    limpiarConsola()
+                    cuentaAtras(colorAmarillo, segundosDescansoLargo)
+                    contador = 0
+        elif confirmacion.upper() == "N" or confirmacion.upper() == "NO":
+            main()
+        else:
+            sys.exit()
+
+    except ValueError:
+        print("¡Inserta un valor válido!")
+        time.sleep(2)
         main()
-    else:
-        sys.exit()
-
 
 
 if __name__ == "__main__":
